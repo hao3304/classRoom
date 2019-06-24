@@ -1,0 +1,166 @@
+query GetEvents($query: QEvents) {
+  events(input: $query) {
+    size
+    total
+    data {
+      id
+      first
+      last
+      recover
+      status
+      o_alarm {
+        name
+      }
+      o_alarm_sensor {
+        o_station {
+          id
+          name
+          type
+          addr
+          position
+        }
+      }
+
+      o_ticket {
+        id
+      }
+    }
+  }
+}
+
+query GetEventStat {
+  event_stat {
+    status {
+      pending
+      working
+      closed
+      auditing
+    }
+  }
+}
+
+subscription Hello {
+  hello
+}
+
+mutation UpdatePosition($id: String, $position: String) {
+  biz_event_position(id: $id, position: $position) {
+    id
+  }
+}
+
+mutation EventCreate(
+  $time: Int64!
+  $category: String!
+  $desc: String!
+  $address: String!
+  $position: String
+  $remark: String
+  $contact: String!
+  $mobile: String!
+  $utype: String
+  $usn: String
+  $uname: String
+  $reason: String
+) {
+  biz_event_create(
+    form: {
+      time: $time
+      category: $category
+      desc: $desc
+      address: $address
+      position: $position
+      remark: $remark
+      contact: $contact
+      mobile: $mobile
+      utype: $utype
+      usn: $usn
+      uname: $uname
+      reason: $reason
+    }
+  ) {
+    id
+  }
+}
+
+mutation EventUpdate(
+  $id: String!
+  $time: Int64
+  $category: String
+  $desc: String
+  $address: String
+  $position: String
+  $remark: String
+  $contact: String
+  $mobile: String
+  $utype: String
+  $usn: String
+  $uname: String
+  $reason: String
+) {
+  biz_event_update(
+    id: $id
+    form: {
+      time: $time
+      category: $category
+      desc: $desc
+      address: $address
+      position: $position
+      remark: $remark
+      contact: $contact
+      mobile: $mobile
+      utype: $utype
+      usn: $usn
+      uname: $uname
+      reason: $reason
+    }
+  )
+}
+
+mutation EventDelete($id: String!) {
+  biz_event_remove(id: $id)
+}
+
+query GetAlarmEvents($input: QEvents) {
+  events(input: $input) {
+    size
+    total
+    data {
+      oid
+      id
+      first
+      fvalue
+      last
+      lvalue
+      recover
+      rvalue
+      rtime
+      conclusion
+      comment
+      o_alarm {
+        name
+      }
+      sensor {
+        name
+        o_source {
+          name
+          o_station {
+            name
+            id
+            o_area {
+              name
+            }
+          }
+          o_device {
+            name
+          }
+        }
+      }
+      message
+      status
+      o_alarm {
+        name
+      }
+    }
+  }
+}

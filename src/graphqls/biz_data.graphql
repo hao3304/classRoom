@@ -1,0 +1,34 @@
+query GetBiz_Datas($query: QBizDatas!) {
+  biz_datas(query: $query) {
+    size
+    total
+    data {
+      id
+      type
+      user
+      title
+      desc
+      attach1
+      attach2
+      attach3
+      created
+      changed
+      o_user {
+        name
+      }
+    }
+  }
+}
+
+mutation Biz_DataCreate($form: NewBizData!) {
+  biz_data_create(form: $form) {
+    id
+  }
+}
+mutation Biz_DataUpdate($id: String!, $form: UpdBizData!) {
+  biz_data_update(id: $id, form: $form)
+}
+
+mutation Biz_DataRemove($id: String!) {
+  biz_data_remove(id: $id)
+}

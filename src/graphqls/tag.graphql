@@ -1,0 +1,12 @@
+query GetTags($query: QTags!) {
+  tags(query: $query) {
+    size
+    total
+    data {
+      id
+      val
+      time
+      changed
+    }
+  }
+}

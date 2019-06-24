@@ -1,0 +1,7 @@
+mutation AreaDisable($area: String!) {
+  area_disable(area: $area)
+}
+
+mutation AreaEnable($area: String!) {
+  area_enable(area: $area)
+}

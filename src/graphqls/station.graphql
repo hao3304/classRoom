@@ -1,0 +1,335 @@
+query GetStations(
+  $id: [String!]
+  $types: [String!]
+  $areas: [String!]
+  $units: [String!]
+  $orders: [String!]!
+  $page: Int!
+  $limit: Int!
+  $name: String
+  $count: Boolean!
+  $where: Where
+) {
+  stations(
+    input: {
+      id: $id
+      types: $types
+      areas: $areas
+      units: $units
+      orders: $orders
+      page: $page
+      limit: $limit
+      count: $count
+      where: $where
+      name: $name
+    }
+  ) {
+    size
+    total
+    data {
+      id
+      status
+      created
+      changed
+      weight
+      type
+      area
+      name
+      addr
+      position
+      tag
+      time
+      devices {
+        id
+        status
+        created
+        changed
+        weight
+        type
+        factory
+        model
+        station
+        name
+        sensors {
+          id
+          status
+          created
+          changed
+          weight
+          station
+          device
+          channel
+          unit
+          name
+          tag
+          transform
+          expression
+          remark
+          time
+          value
+        }
+      }
+
+      sensors {
+        id
+        status
+        created
+        changed
+        weight
+        station
+        device
+        channel
+        unit
+        name
+        tag
+        transform
+        expression
+        remark
+        time
+        value
+      }
+    }
+  }
+}
+
+query GetStation($id: String!) {
+  station(id: $id) {
+    id
+    status
+    created
+    changed
+    weight
+    type
+    area
+    name
+    model
+    addr
+    position
+    tag
+    time
+    sensors {
+      id
+      name
+      time
+      unit
+      o_unit {
+        type
+        cycle
+      }
+      value
+    }
+    o_area {
+      name
+    }
+  }
+}
+
+mutation InitStation($station: String!, $model: String!) {
+  initantiate_model_on_station(station: $station, model: $model) {
+    id
+  }
+}
+
+mutation InitDevice($device: String!, $model: String!) {
+  initantiate_model_on_device(device: $device, model: $model) {
+    id
+  }
+}
+
+query GetDevices($query: QDevice!) {
+  devices(query: $query) {
+    size
+    total
+    data {
+      id
+      name
+      type
+      o_station {
+        name
+        time
+      }
+      factory
+      sensors {
+        id
+        name
+        unit
+        value
+        time
+      }
+    }
+  }
+}
+
+query GetRqhb(
+  $date: String!
+  $page: Int!
+  $limit: Int!
+  $count: Boolean!
+  $query: QBizDcRqhb
+) {
+  dc_rqhb(
+    date: $date
+    page: $page
+    limit: $limit
+    count: $count
+    query: $query
+  ) {
+    size
+    total
+    data {
+      id
+      device
+      sn
+      date
+      time
+      price
+      balance
+      usage
+      flow
+      pressure
+      temperature
+      today
+      month
+      ladder
+      signal
+      valve
+      alarm_battery
+      alarm_external
+      alarm_flow
+      o_device {
+        factory
+        name
+        o_station {
+          name
+        }
+      }
+    }
+  }
+}
+
+query AdminStations(
+  $id: [String!]
+  $types: [String!]
+  $areas: [String!]
+  $units: [String!]
+  $orders: [String!]!
+  $page: Int!
+  $limit: Int!
+  $name: String
+  $count: Boolean!
+  $where: Where
+  $exclude_alarms: [String!]
+) {
+  stations: admin_stations(
+    query: {
+      id: $id
+      types: $types
+      areas: $areas
+      units: $units
+      orders: $orders
+      page: $page
+      limit: $limit
+      count: $count
+      where: $where
+      name: $name
+      exclude_alarms: $exclude_alarms
+    }
+  ) {
+    size
+    total
+    data {
+      id
+      status
+      created
+      changed
+      weight
+      type
+      area
+      name
+      addr
+      position
+      tag
+    }
+  }
+}
+
+query GetSensors($query: QSensors) {
+  sensors(query: $query) {
+    total
+    size
+    data {
+      id
+      name
+      value
+      unit
+      o_station {
+        name
+        o_area {
+          name
+        }
+      }
+      o_device {
+        name
+      }
+
+      o_unit {
+        name
+        unit
+      }
+    }
+  }
+}
+
+query GetStationList(
+  $id: [String!]
+  $types: [String!]
+  $areas: [String!]
+  $units: [String!]
+  $orders: [String!]!
+  $page: Int!
+  $limit: Int!
+  $name: String
+  $count: Boolean!
+  $where: Where
+) {
+  stations(
+    input: {
+      id: $id
+      types: $types
+      areas: $areas
+      units: $units
+      orders: $orders
+      page: $page
+      limit: $limit
+      count: $count
+      where: $where
+      name: $name
+    }
+  ) {
+    size
+    total
+    data {
+      id
+      name
+      code
+    }
+  }
+}
+
+query DmaByStation($id: String!) {
+  data: dma_by_station(id: $id) {
+    id
+  }
+}
+
+query VipByStation($id: String!) {
+  data: vip_by_station(id: $id) {
+    id
+    o_flowmeter {
+      id
+      o_device {
+        code
+      }
+    }
+  }
+}

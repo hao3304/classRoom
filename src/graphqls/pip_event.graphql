@@ -1,0 +1,44 @@
+query GetPipe_Events($query: QLogPipeEvents!) {
+  pipe_events: log_pipe_events(query: $query) {
+    total
+    size
+    data {
+      id
+      time
+      type
+      user
+      desc
+      dma
+      addr
+      position
+      stime
+      etime
+      flux
+      created
+      changed
+      o_user {
+        name
+        id
+      }
+      o_dma {
+        o_station {
+          name
+        }
+      }
+    }
+  }
+}
+
+mutation Pipe_EventCreate($form: NewPipeEvent!) {
+  pipe_event_create(form: $form) {
+    id
+  }
+}
+
+mutation Pipe_EventUpdate($id: String!, $form: UpdPipeEvent!) {
+  pipe_event_update(id: $id, form: $form)
+}
+
+mutation Pipe_EventRemove($id: String!) {
+  pipe_event_remove(id: $id)
+}

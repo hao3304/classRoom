@@ -1,0 +1,45 @@
+query GetPipe_Detects($query: QLogPipeDetects!) {
+  pipe_detects: log_pipe_detects(query: $query) {
+    total
+    size
+    data {
+      id
+      dma
+      o_dma {
+        o_station {
+          name
+        }
+      }
+      uid
+      addr
+      position
+      type
+      size
+      state
+      material
+      caliber
+      ground
+      ptime
+      puid
+      presult
+      pdesc
+      pphoto
+      created
+      changed
+    }
+  }
+}
+
+mutation Pipe_DetectCreate($form: NewPipeDetect!) {
+  pipe_detect_create(form: $form) {
+    id
+  }
+}
+
+mutation Pipe_DetectUpdate($id: String!, $form: UpdPipeDetect!) {
+  pipe_detect_update(id: $id, form: $form)
+}
+
+mutation Pipe_DetectRemove($id: String!) {
+  pipe_detect_remove(id: $id)
+}

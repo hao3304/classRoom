@@ -1,0 +1,36 @@
+query GetSensors($query: QSensors) {
+  sensors(query: $query) {
+    total
+    size
+    data {
+      id
+      name
+      unit
+      tag
+      channel
+      status
+      expression
+      remark
+      transform
+      created
+      changed
+      cycle
+      weight
+      device
+    }
+  }
+}
+
+mutation SensorCreate($form: NewSensor!) {
+  sensor_create(form: $form) {
+    id
+  }
+}
+
+mutation SensorUpdate($id: String!, $form: UpdSensor!) {
+  sensor_update(id: $id, form: $form)
+}
+
+mutation SensorRemove($id: String!) {
+  sensor_remove(id: $id)
+}

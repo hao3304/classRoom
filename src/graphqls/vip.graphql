@@ -1,0 +1,129 @@
+query GetVips($query: QVIP!) {
+  vips(query: $query) {
+    size
+    total
+    data {
+      id
+      dma
+      station
+      type
+      stime
+      suid
+      saddr
+      dma
+      o_dma {
+        id
+        o_station {
+          name
+        }
+      }
+
+      stype
+      direction
+      sphoto
+      status
+      weight
+      created
+      changed
+
+      o_station {
+        id
+        name
+        code
+        type
+        area
+        position
+        model
+
+        weight
+        time
+        sensors {
+          id
+          name
+          unit
+          value
+          time
+        }
+      }
+      o_flowmeter {
+        id
+        caliber
+        smmodel
+        o_smmodel {
+          model
+        }
+        o_device {
+          code
+        }
+      }
+    }
+  }
+}
+
+query GetVip($id: String!) {
+  vip(id: $id) {
+    id
+    dma
+    station
+    type
+    stime
+    suid
+    saddr
+    dma
+    stype
+    direction
+    sphoto
+    status
+    weight
+    created
+    changed
+    o_dma {
+      o_station {
+        name
+      }
+    }
+
+    o_station {
+      time
+      name
+      sensors {
+        name
+        time
+        unit
+        value
+      }
+    }
+
+    o_flowmeter {
+      id
+      caliber
+      smmodel
+      o_smmodel {
+        model
+      }
+      o_device {
+        sensors {
+          id
+          name
+          unit
+          value
+          time
+        }
+      }
+    }
+  }
+}
+
+mutation VipCreate($form: NewVIP!) {
+  vip_create(form: $form) {
+    id
+  }
+}
+
+mutation VipUpdate($id: String!, $form: UpdVIP!) {
+  vip_update(id: $id, form: $form)
+}
+
+mutation VipRemove($id: String!) {
+  vip_remove(id: $id)
+}

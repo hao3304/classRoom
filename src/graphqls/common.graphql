@@ -1,0 +1,4 @@
+query GetPinyin($str: String!) {
+  capital(str: $str)
+  pinyin(str: $str)
+}

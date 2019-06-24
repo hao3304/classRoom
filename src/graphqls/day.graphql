@@ -1,0 +1,33 @@
+query GetDay($input: QDay) {
+  day(input: $input) {
+    station
+    device
+    id
+    unit
+    o_station {
+      id
+      name
+    }
+    o_sensor {
+      id
+      name
+      time
+      value
+      unit
+    }
+
+    o_unit {
+      id
+      name
+      unit
+      type
+    }
+
+    values {
+      time
+      value
+      flux
+      fvalue
+    }
+  }
+}

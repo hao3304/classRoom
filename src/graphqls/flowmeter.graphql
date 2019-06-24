@@ -1,0 +1,74 @@
+query GetFlowmeters($query: QFlowmeters!) {
+  flowmeters(query: $query) {
+    size
+    total
+    data {
+      id
+      device
+      caliber
+      ccwc
+      sjwc
+      pdate
+      pcode
+      iprating
+      accuracy
+      mrange
+      smmodel
+      o_smmodel {
+        model
+      }
+      smzero
+      smgk
+      smlimit
+      smmid
+      smcomm
+      status
+      weight
+      bdate
+      sdate
+      created
+      changed
+      o_device {
+        id
+        name
+        code
+        status
+        weight
+        type
+        factory
+        model
+        station
+        name
+      }
+    }
+  }
+}
+
+query GetFlowmeter($id: String!) {
+  flowmeter(id: $id) {
+    id
+    o_device {
+      sensors {
+        id
+        name
+        unit
+        value
+        time
+      }
+    }
+  }
+}
+
+mutation FlowmeterCreate($form: NewFlowmeter!) {
+  flowmeter_create(form: $form) {
+    id
+  }
+}
+
+mutation FlowmeterUpdate($id: String!, $form: UpdFlowmeter!) {
+  flowmeter_update(id: $id, form: $form)
+}
+
+mutation FlowmeterRemove($id: String!) {
+  flowmeter_remove(id: $id)
+}

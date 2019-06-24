@@ -1,0 +1,31 @@
+export default {
+  id: "ID",
+  time: "接线时间",
+  category: "业务类型",
+  majority: "问题大类",
+  minor: "问题小类",
+  address: "发生地点",
+  position: "坐标",
+  desc: "反应问题",
+  remark: "备注信息",
+  contact: "联系人",
+  mobile: "联系电话",
+  utype: "用户类型",
+  usn: "户号",
+  uname: "户名",
+  rdep: "接收部门",
+  rtime: "接收时间",
+  ruser: "接收人员",
+  atime: "分派时间",
+  auser: "分派人员",
+  ptime: "开始处理时间",
+  puser: "处理人员",
+  ctime: "处理结束时间",
+  reason: "现场情况",
+  result: "处理结果",
+  status: {
+    name: "状态",
+    defaluts: 0
+  },
+  lsh: "热线业务标签"
+};

@@ -1,0 +1,18 @@
+query GetVideos {
+  videos {
+    id
+    name
+    position
+    type
+    streams {
+      id
+      name
+      main
+      sub
+    }
+    children {
+      id
+      name
+    }
+  }
+}

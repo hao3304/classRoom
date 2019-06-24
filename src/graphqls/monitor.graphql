@@ -1,0 +1,93 @@
+query GetMonitors($query: QMonitor!) {
+  monitors(query: $query) {
+    size
+    total
+    data {
+      id
+      dma
+      station
+      mtype
+      stime
+      suid
+      saddr
+      stype
+      direction
+      sphoto
+      status
+      weight
+      created
+      changed
+
+      o_station {
+        id
+        name
+        code
+        type
+        area
+        position
+        weight
+        model
+        time
+        sensors {
+          id
+          name
+          unit
+          value
+          time
+        }
+      }
+
+      o_flowmeter {
+        id
+        caliber
+        smmodel
+        o_device {
+          code
+        }
+      }
+    }
+  }
+}
+
+query GetMonitor($id: String!) {
+  monitor(id: $id) {
+    id
+
+    o_station {
+      time
+      name
+      sensors {
+        name
+        time
+        unit
+        value
+      }
+    }
+
+    o_flowmeter {
+      o_device {
+        sensors {
+          id
+          name
+          unit
+          value
+          time
+        }
+      }
+    }
+  }
+}
+
+mutation MonitorCreate($form: NewMonitor!) {
+  monitor_create(form: $form) {
+    id
+  }
+}
+
+mutation MonitorUpdate($id: String!, $form: UpdMonitor!) {
+  monitor_update(id: $id, form: $form)
+}
+
+mutation MonitorRemove($id: String!) {
+  monitor_remove(id: $id)
+}
