@@ -16,7 +16,7 @@
     </div>
     <div class="f-footer__right">
       版权所有 &copy; 2019
-      <strong><a href="javascript:void(0)">上海锐铼水务科技有限公司</a></strong>
+      <strong><a href="javascript:void(0)">上海交大零一编程</a></strong>
     </div>
     <!--<div class="f-footer__right">-->
     <!--版本号：v0.9.0-->

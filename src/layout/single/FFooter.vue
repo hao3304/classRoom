@@ -17,7 +17,7 @@
     <div class="f-footer__center" style="text-align:center;">
       <Icon type="ios-barcode-outline" size="24" /> &nbsp;&nbsp;版权所有 &copy;
       2019
-      <strong><a href="javascript:void(0)">上海锐铼水务科技有限公司</a></strong>
+      <strong><a href="javascript:void(0)">上海交大零一编程</a></strong>
     </div>
     <div class="f-footer__right">
       {{ system.version }}

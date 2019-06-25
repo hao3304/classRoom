@@ -53,6 +53,29 @@ export default new Router({
           component: page404
         }
       ]
+    },
+    {
+      path: "/home",
+      alias: "/",
+      component: () => import("@/layout/single"),
+      children: [
+        {
+          path: "",
+          name: "home",
+          meta: {
+            title: "个人中心"
+          },
+          component: () => import("@/views/home")
+        },
+        {
+          path: "problem",
+          name: "problem",
+          meta: {
+            title: "个人中心"
+          },
+          component: () => import("@/views/problem")
+        }
+      ]
     }
   ]
 });

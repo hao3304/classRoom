@@ -24,8 +24,9 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     proxy: {
-      "/rhenium/nsq-api": {
-        target: "http://117.186.93.54:8903",
+      "/api/": {
+        target: "http://202.121.179.38:9000/",
+        pathRewrite: {"^/api" : ""},
         changeOrigin: true,
         ws: true
       }

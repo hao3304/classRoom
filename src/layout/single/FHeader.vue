@@ -3,7 +3,7 @@
     <div :class="b('logo')">
       <img src="~@/assets/images/logo.png" alt="" />
     </div>
-    <div :class="b('title')">{{ system.name || "供水计量管理系统" }}</div>
+    <div :class="b('title')">{{ system.name || "零一编程教室" }}</div>
     <div :class="b('menu')">
       <ul>
         <li
@@ -104,9 +104,8 @@
 </template>
 <script>
 import { mapState, mapMutations } from "vuex";
-import { DoLogout } from "@/graphqls/base.graphql";
-import { TicketStat, TicketAssign } from "@/graphqls/ticket.graphql";
 const avatar = require("@/assets/images/avatar.png");
+import service from "@/services/login";
 export default {
   name: "f-header",
   computed: {
@@ -161,9 +160,7 @@ export default {
         content: "确定要退出当前用户？",
         onOk: () => {
           this.$store.commit("logout");
-          this.$apollo.mutate({
-            mutation: DoLogout
-          });
+          service.logout().then(rep => {});
         },
         onCancel: () => {}
       });
@@ -196,51 +193,9 @@ export default {
     },
     onRefresh() {
       window.location.reload();
-    },
-    getMyTicket() {
-      this.$apollo
-        .query({
-          query: TicketStat,
-          fetchPolicy: "network-only",
-          variables: {
-            own: true
-          }
-        })
-        .then(({ data }) => {
-          this.myTicket =
-            data.ticket_stat.status.working +
-            data.ticket_stat.status.pending +
-            data.ticket_stat.status.auditing;
-        });
-    },
-    subscribe() {
-      const self = this;
-      const observer = this.$apollo.subscribe({
-        query: TicketAssign,
-        variables: {
-          token: this.token
-        },
-        client: "ws"
-      });
-      observer.subscribe({
-        next() {
-          self.getMyTicket();
-          self.$Notice.success({
-            title: "提醒",
-            desc: "您有新的工单，请注意查收。"
-          });
-          // self.playAudio();
-        },
-        error(errorValue) {
-          alert(errorValue);
-        }
-      });
     }
   },
-  mounted() {
-    // this.subscribe();
-    this.getMyTicket();
-  }
+  mounted() {}
 };
 </script>
 <style lang="less" scoped>
@@ -259,8 +214,8 @@ export default {
 
 .f-header {
   height: @HeaderHeight;
-  background-image: url("~@/assets/images/header-bg.png");
-  background-size: 100% 100%;
+  background-image: url("~@/assets/images/header-bg.jpg");
+  background-size: 100%;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.06);
   border-bottom: 4px solid rgba(0, 0, 0, 0.1);
   display: flex;
@@ -269,7 +224,7 @@ export default {
 
   &__logo {
     img {
-      width: 60px;
+      width: 150px;
     }
   }
 

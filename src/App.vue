@@ -1,18 +1,11 @@
 <template>
   <div id="app">
-    <router-view
-      v-if="types.iot.length > 0 || $route.name == 'Login'"
-    ></router-view>
-    <Login v-if="isLogin || !token"></Login>
-    <loading v-if="!isLogin && types.iot.length == 0 && token"></loading>
+    <router-view></router-view>
   </div>
 </template>
 <script>
 import { mapMutations, mapState } from "vuex";
-import loading from "./views/loading";
-import Login from "./views/login";
 export default {
-  components: { loading, Login },
   data() {
     return {
       isLogin: false
@@ -28,13 +21,13 @@ export default {
     }
   },
   async beforeCreate() {
-    const token = this.$ls.get("token");
-    if (token) {
-      this.$store.commit("set_token", token);
-      await this.$store.dispatch("common/init");
-    } else {
-      this.$router.replace({ name: "Login" });
-    }
+    // const token = this.$ls.get("token");
+    // if (token) {
+    //   this.$store.commit("set_token", token);
+    //   await this.$store.dispatch("common/init");
+    // } else {
+    //   this.$router.replace({ name: "Login" });
+    // }
   },
   methods: {
     ...mapMutations("app", ["set_breadcrumbs"]),

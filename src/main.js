@@ -59,10 +59,10 @@ router.beforeEach((to, from, next) => {
     return next({ name: "404" });
   }
   iview.LoadingBar.start();
-  if (!store.state.token && to.name != "Login") {
-    iview.LoadingBar.finish();
-    return next({ name: "Login" });
-  }
+  // if (!store.state.token && to.name != "Login") {
+  //   iview.LoadingBar.finish();
+  //   return next({ name: "Login" });
+  // }
   next();
 });
 router.afterEach(() => {

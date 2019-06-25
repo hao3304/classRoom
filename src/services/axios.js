@@ -1,50 +1,41 @@
 import axios from "axios";
-import Cookies from "@/libs/ls";
 import Vue from "../main";
 
 export const GetRoot = () => {
-  // const origin = window.location.origin;
   return process.env.VUE_APP_BOOT;
-
-  // if (origin.indexOf("gitee") > -1) {
-  //   return "https://mobile.jxrqgs.com";
-  // } else {
-  //   return process.env.NODE_ENV == "development"
-  //     ? process.env.VUE_APP_BOOT
-  //     : origin;
-  // }
 };
 export const ROOT = GetRoot();
-export const baseURL = ROOT + "/" + process.env.VUE_APP_DISPLAY;
+export const baseURL = ROOT + "/api/";
 
 const instance = axios.create({
   baseURL,
   timeout: 80000,
+  transformRequest: [
+    function(data) {
+      // Do whatever you want to transform the data
+      let ret = [];
+      for (let it in data) {
+        ret.push(encodeURIComponent(it) + "=" + encodeURIComponent(data[it]));
+      }
+      return ret.join("&");
+    }
+  ],
   headers: {
-    "Content-Type": "application/json",
-    "X-AUTH-TOKEN": Cookies.get("token")
+    "Content-Type": "application/x-www-form-urlencoded"
   }
 });
 
 instance.interceptors.response.use(
   res => {
-    if (res.data.code === 0) {
-      return res.data.response;
-    } else if (res.data.code == 403) {
-      Vue.$store.commit("LOGOUT");
-      Vue.$router.push("/login");
-      Vue.$Notice.error({
-        title: "警告",
-        desc: res.data.message,
-        duration: 4
-      });
-      return Promise.reject();
+    if (res.data.err === "" || res.data.err == undefined) {
+      return res.data;
     } else {
       Vue.$Notice.error({
         title: "警告",
-        desc: res.data.message,
+        desc: res.data.err,
         duration: 4
       });
+      Vue.$router.push("/login");
       return Promise.reject();
     }
   },
