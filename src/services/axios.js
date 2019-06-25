@@ -27,7 +27,9 @@ const instance = axios.create({
 
 instance.interceptors.response.use(
   res => {
-    if (res.data.err === "" || res.data.err == undefined) {
+    if (typeof res.data == "string" && res.data.indexOf("未注册") > -1) {
+      Vue.$router.push("/login");
+    } else if (res.data.err === "" || res.data.err == undefined) {
       return res.data;
     } else {
       Vue.$Notice.error({
