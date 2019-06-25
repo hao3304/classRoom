@@ -7,8 +7,6 @@ import Test from "@/views/test.vue";
 import Login from "@/views/login";
 
 export default new Router({
-  mode: "history",
-  base: process.env.NODE_ENV == "production" ? "/app/" : "/",
   routes: [
     {
       path: "/login",
