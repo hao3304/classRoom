@@ -4,16 +4,8 @@ const webpack = require("webpack");
 module.exports = {
   entry: {
     vendor: [
-      "apollo-cache-inmemory",
-      "apollo-client",
-      "apollo-link",
-      "apollo-link-error",
-      "apollo-link-http",
-      "graphql",
-      "graphql-tag",
       "store",
       "unfetch",
-      "vue-apollo",
       "vue-bem-cn",
       "vue-gemini-scrollbar"
     ]

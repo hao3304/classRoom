@@ -15,7 +15,6 @@ Vue.use(fvc);
 Vue.use(GeminiScrollbar);
 // Vue.use(EasyUI);
 Vue.use(vueBemCn, {});
-import apolloProvider from "./apollo";
 import "vue2-animate/dist/vue2-animate.min.css";
 import "@/style/style.less";
 import "iview/dist/styles/iview.css";
@@ -28,7 +27,6 @@ export { Vue };
 export default new Vue({
   router,
   store,
-  apolloProvider,
   render: h => h(App),
   mounted() {
     window.onresize = () => {
