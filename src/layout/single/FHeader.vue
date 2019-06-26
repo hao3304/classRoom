@@ -83,21 +83,21 @@
       </Poptip>
       <a href="javascript:;">
         <f-icon
-          icon="icon-quanping"
+          icon="iconquanping"
           v-show="!fullScreen"
           @click="onFullScreen"
         ></f-icon>
         <f-icon
-          icon="icon-009pingmusuoxiao"
+          icon="icon009pingmusuoxiao"
           v-show="fullScreen"
           @click="onExitFullScreen"
         ></f-icon>
       </a>
       <a href="javascript:;">
-        <f-icon icon="icon-shuaxin1" @click="onRefresh"></f-icon>
+        <f-icon icon="iconshuaxin1" @click="onRefresh"></f-icon>
       </a>
       <a href="javascript:;">
-        <f-icon icon="icon-tuichu" @click="onLogout"></f-icon>
+        <f-icon icon="icontuichu" @click="onLogout"></f-icon>
       </a>
     </div>
   </div>

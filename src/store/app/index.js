@@ -3,9 +3,15 @@ export default {
   state: {
     modules: [
       {
+        id: 2,
+        name: "课堂学习",
+        icon: "iconkecheng",
+        path: "study"
+      },
+      {
         id: 1,
-        name: "个人中心",
-        icon: "icon-yonghuguanli",
+        name: "作业练习",
+        icon: "iconzuoye",
         path: "home"
       }
       // {

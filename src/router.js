@@ -61,7 +61,7 @@ export default new Router({
           path: "",
           name: "home",
           meta: {
-            title: "个人中心"
+            title: "作业练习"
           },
           component: () => import("@/views/home")
         },
@@ -69,7 +69,7 @@ export default new Router({
           path: "problem",
           name: "problem",
           meta: {
-            title: "个人中心"
+            title: "作业练习"
           },
           component: () => import("@/views/problem")
         }
