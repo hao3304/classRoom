@@ -62,20 +62,20 @@
       </ul>
     </div>
     <div :class="b('tool')">
-      <Poptip :title="`你好，${me.name}！`" placement="top-end">
-        <Badge :dot="myTicket > 0" style="margin-right: 10px">
+      <Poptip :title="`你好，${info.firstname + info.lastname}！`" placement="top-end">
+        <Badge  style="margin-right: 10px">
           <Avatar size="large" :src="avatar" alt="" />
         </Badge>
-        {{ me.name }}
+        {{ info.id }}
         <Icon type="md-arrow-dropdown" />
 
         <CellGroup slot="content">
-          <Cell
-            title="我的工单"
-            :to="{ name: 'MyTicket', query: { mine: true } }"
-          >
-            <Badge :count="myTicket" slot="extra" />
-          </Cell>
+<!--          <Cell-->
+<!--            title="我的工单"-->
+<!--            :to="{ name: 'MyTicket', query: { mine: true } }"-->
+<!--          >-->
+<!--            <Badge :count="myTicket" slot="extra" />-->
+<!--          </Cell>-->
           <Cell>
             <div @click="onLogout">退出</div>
           </Cell>
@@ -106,6 +106,7 @@
 import { mapState, mapMutations } from "vuex";
 const avatar = require("@/assets/images/avatar.png");
 import service from "@/services/login";
+import baseService from "@/services/base";
 export default {
   name: "f-header",
   computed: {
@@ -117,7 +118,7 @@ export default {
     enter: null,
     fullScreen: false,
     avatar,
-    myTicket: 0
+    info: {}
   }),
   methods: {
     ...mapMutations("app", ["set_module", "set_keep_alive"]),
@@ -195,7 +196,11 @@ export default {
       window.location.reload();
     }
   },
-  mounted() {}
+  mounted() {
+    baseService.userInfo().then(rep=> {
+      this.info = rep.data;
+    })
+  }
 };
 </script>
 <style lang="less" scoped>

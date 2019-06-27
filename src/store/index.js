@@ -6,7 +6,6 @@ import app from "./app";
 import monitor from "./monitor";
 import common from "./common";
 import vip from "./vip";
-import command from "./command";
 import router from "@/router";
 import ls from "@/libs/ls";
 import iot from "fvc-iot/src/store";
@@ -70,7 +69,6 @@ export default new Vuex.Store({
     monitor,
     common,
     vip,
-    command,
     iot
   }
 });
