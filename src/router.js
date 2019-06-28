@@ -74,6 +74,20 @@ export default new Router({
           component: () => import("@/views/problem")
         }
       ]
+    },
+    {
+      path: "/study",
+      component: () => import("@/layout/single"),
+      children: [
+        {
+          path: "",
+          name: "study",
+          meta: {
+            title: "课堂学习"
+          },
+          component: Building
+        }
+      ]
     }
   ]
 });

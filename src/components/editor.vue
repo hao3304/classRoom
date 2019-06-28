@@ -1,11 +1,11 @@
 <template>
-    <div class="f-editor" ref="editor"></div>
+    <div class="f-editor" :style="{height: height+ 'px'}" ref="editor"></div>
 </template>
 
 <script>
     import * as monaco from "monaco-editor";
     export default {
-        props: ['value'],
+        props: ['value', 'height'],
         name: "editor",
         data() {
             return {
@@ -15,6 +15,9 @@
         watch: {
             value() {
                 this.$editor.getModel().setValue(this.value);
+            },
+            height() {
+                this.resize();
             }
         },
         methods: {
@@ -22,7 +25,8 @@
                 this.$editor = monaco.editor.create(this.$refs.editor, {
                     value: this.val,
                     language: "cpp",
-                    theme: "vs-dark"
+                    theme: "vs-dark",
+                    contextmenu: false
                 });
 
                 this.$editor.onDidChangeModelContent(event=> {
@@ -32,10 +36,15 @@
             },
             resize() {
                 this.$editor.layout();
+            },
+            getContent() {
+                this.$editor.getModel().getValue();
             }
         },
         mounted() {
-            this.render();
+            setTimeout(()=> {
+                this.render();
+            }, 500)
             window.onresize = ()=> {
                 this.$editor.layout();
             }

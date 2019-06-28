@@ -27,7 +27,7 @@ export default {
     onRoute(item) {
       this.$router.push({
         name: "problem",
-        query: { id: item.problemIds.join(",") }
+        query: { id: item.problemIds.join(",") , repoId: item.repoId}
       });
     }
   },
