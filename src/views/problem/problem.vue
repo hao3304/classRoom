@@ -11,10 +11,7 @@
     </Tabs>
     <div class="p-problem__content">
       <Split v-model="split" min="500px" max="600px">
-        <div slot="left" >
-          <div style="overflow: hidden;padding: 10px 20px;" v-html="problem"></div>
-        </div>
-
+          <div  slot="left" style="overflow-y: auto; overflow-x: hidden;padding: 10px 20px;height: 100%" v-html="problem"></div>
         <Split slot="right" mode="vertical" v-model="vSplit">
           <f-panel slot="top" :header="false"  style="height: 100%">
             <div slot="body" slot-scope="param">
@@ -94,6 +91,9 @@
       if(this.ids.length > 0) {
         this.render(this.ids[0])
       }
+      service.submitState({submitId: this.$route.query.id}).then(rep=> {
+        debugger
+      })
     }
   };
 </script>
