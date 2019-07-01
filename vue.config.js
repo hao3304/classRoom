@@ -26,13 +26,13 @@ module.exports = {
     proxy: {
       "/api/": {
         target: "http://202.121.179.38:9000/",
-        pathRewrite: {"^/api" : ""},
+        pathRewrite: { "^/api": "" },
         changeOrigin: true,
         ws: true
       },
       "/ide/": {
-        target: 'http://ide.joyoj.org/',
-        pathRewrite: {"^/ide" : ""},
+        target: "http://ide.joyoj.org/",
+        pathRewrite: { "^/ide": "" },
         changeOrigin: true,
         ws: true
       }

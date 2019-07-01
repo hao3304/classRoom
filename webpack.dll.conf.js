@@ -3,12 +3,7 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: {
-    vendor: [
-      "store",
-      "unfetch",
-      "vue-bem-cn",
-      "vue-gemini-scrollbar"
-    ]
+    vendor: ["store", "unfetch", "vue-bem-cn", "vue-gemini-scrollbar"]
   },
   output: {
     path: path.join(__dirname, "public/vendor"),

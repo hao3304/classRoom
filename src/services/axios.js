@@ -1,5 +1,6 @@
 import axios from "axios";
 import Vue from "../main";
+import ls from "@/libs/ls";
 
 export const GetRoot = () => {
   return process.env.VUE_APP_BOOT;
@@ -11,13 +12,17 @@ const instance = axios.create({
   baseURL,
   timeout: 80000,
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "X-CSRF-TOKEN": ls.get("cookies")
   }
 });
 
 instance.interceptors.response.use(
   res => {
-    if (typeof res.data == "string" && res.data.indexOf("未注册") > -1) {
+    if (
+      typeof res.data == "string" &&
+      res.data.indexOf("access_token_cookie") > -1
+    ) {
       Vue.$router.push("/login");
     } else if (res.data.err === "" || res.data.err == undefined) {
       return res.data;

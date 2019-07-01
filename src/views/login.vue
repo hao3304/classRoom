@@ -145,6 +145,7 @@ import axios from "@/services/axios";
 
 // import { CreateJsbUser } from "@/graphql/user.graphql";
 import { baseURL } from "@/services/axios";
+import ls from "@/libs/ls";
 const model = () => {
   return {
     firstname: "",
@@ -240,6 +241,10 @@ export default {
             .then(rep => {
               this.loading = false;
               this.$router.replace({ name: rep.redirect });
+              const cookies = document.cookie.split("=")[1];
+              ls.set("cookies", cookies, new Date().valueOf() + 3600 * 24000);
+              axios.defaults.headers["X-CSRF-TOKEN"] = cookies;
+              alert(cookies);
             })
             .catch(e => {
               this.loading = false;

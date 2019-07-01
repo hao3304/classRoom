@@ -62,24 +62,31 @@
       </ul>
     </div>
     <div :class="b('tool')">
-      <Poptip :title="`你好，${info.firstname + info.lastname}！`" placement="top-end">
-        <Badge  style="margin-right: 10px">
+      <Poptip
+        :title="`你好，${info.firstname + info.lastname}！`"
+        placement="top-end"
+      >
+        <Badge style="margin-right: 10px">
           <Avatar size="large" :src="avatar" alt="" />
         </Badge>
         {{ info.id }}
         <Icon type="md-arrow-dropdown" />
 
-        <CellGroup slot="content">
-<!--          <Cell-->
-<!--            title="我的工单"-->
-<!--            :to="{ name: 'MyTicket', query: { mine: true } }"-->
-<!--          >-->
-<!--            <Badge :count="myTicket" slot="extra" />-->
-<!--          </Cell>-->
-          <Cell>
-            <div @click="onLogout">退出</div>
-          </Cell>
-        </CellGroup>
+        <div slot="content" class="ivu-cell-group">
+          <div class="ivu-cell" @click="onLogout">
+            <div class="ivu-cell-link">
+              <div class="ivu-cell-item">
+                <div class="ivu-cell-icon"></div>
+                <div class="ivu-cell-main">
+                  <div class="ivu-cell-title">
+                    <div>退出</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!---->
+          </div>
+        </div>
       </Poptip>
       <a href="javascript:;">
         <f-icon
@@ -197,9 +204,9 @@ export default {
     }
   },
   mounted() {
-    baseService.userInfo().then(rep=> {
+    baseService.userInfo().then(rep => {
       this.info = rep.data;
-    })
+    });
   }
 };
 </script>
