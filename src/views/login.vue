@@ -244,7 +244,6 @@ export default {
               const cookies = document.cookie.split("=")[1];
               ls.set("cookies", cookies, new Date().valueOf() + 3600 * 24000);
               axios.defaults.headers["X-CSRF-TOKEN"] = cookies;
-              alert(cookies);
             })
             .catch(e => {
               this.loading = false;

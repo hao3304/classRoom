@@ -38,12 +38,15 @@ export default {
     },
     getContent() {
       return this.$editor.getModel().getValue();
+    },
+    setContent(code) {
+      return this.$editor.getModel().setValue(code);
     }
   },
   mounted() {
     setTimeout(() => {
       this.render();
-    }, 200);
+    }, 1);
     window.onresize = () => {
       this.$editor.layout();
     };

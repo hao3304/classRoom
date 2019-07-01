@@ -73,15 +73,7 @@ export default {
       stdout: [],
       type: 0,
       loading: false,
-      code: `#include<iostream>              //预处理，包含头文件
-using namespace std;
-
-int main()                      //主函数，程序起点
-{
-    cout<<"Hello World!"<<endl; //输出字符串 Hello World!
-    return 0;                   //程序返回值
-}
-`
+      code: ""
     };
   },
   watch: {
@@ -100,8 +92,11 @@ int main()                      //主函数，程序起点
         });
       });
       this.renderTerminal();
-
-      service.lastSubmit({ assignmentId: this.assignmentId }).then(rep => {});
+      service
+        .lastSubmit({ assignmentId: this.assignmentId, problemId: id })
+        .then(rep => {
+          this.$refs.editor.setContent(rep.data);
+        });
     },
     renderTerminal() {
       let self = this;
