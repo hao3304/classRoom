@@ -6,7 +6,7 @@
       <div class="f-main">
         <f-tab></f-tab>
         <div class="f-container">
-          <keep-alive>
+          <keep-alive :exclude="['problem']">
             <router-view></router-view>
           </keep-alive>
         </div>

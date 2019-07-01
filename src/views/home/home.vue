@@ -6,7 +6,8 @@
         <i-col :span="4" v-for="(item, key) in assignments" :key="key">
           <div class="item" @click="onRoute(item)">
             <h5>{{ key }}</h5>
-            <p>{{ item.problemIds.length }}道题目</p>
+            <p>{{ getLength(item.problems)}}道题目</p>
+            <div class="process">完成进度：{{getProcess(item.problems)}}</div>
           </div>
         </i-col>
       </Row>
@@ -27,8 +28,26 @@ export default {
     onRoute(item) {
       this.$router.push({
         name: "problem",
-        query: { id: item.problemIds.join(",") , repoId: item.repoId}
+        query: { id: Object.keys(item.problems).join(',') , repoId: item.repoId, assignmentId: item.assignmentId}
       });
+    },
+    getLength(obj) {
+      return Object.keys(obj).length;
+    },
+    getProcess(obj) {
+      const keys = Object.keys(obj);
+      let h = 0;
+      if(keys.length == 0) {
+        return '-';
+      } else {
+        keys.forEach(key=> {
+          if(obj[key]) {
+            h++;
+          }
+        })
+
+        return parseInt(h*100/keys.length) + '%'
+      }
     }
   },
   mounted() {
@@ -70,6 +89,13 @@ export default {
       p {
         color: #666;
         font-size: 14px;
+      }
+      .process {
+        text-align: right;
+        color: #0099cc;
+        font-weight: bold;
+        font-size: 14px;
+        margin-top: 20px;
       }
     }
   }

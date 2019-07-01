@@ -5,23 +5,13 @@ export const GetRoot = () => {
   return process.env.VUE_APP_BOOT;
 };
 export const ROOT = GetRoot();
-export const baseURL = ROOT + "/api/";
+export const baseURL = ROOT + "";
 
 const instance = axios.create({
   baseURL,
   timeout: 80000,
-  transformRequest: [
-    function(data) {
-      // Do whatever you want to transform the data
-      let ret = [];
-      for (let it in data) {
-        ret.push(encodeURIComponent(it) + "=" + encodeURIComponent(data[it]));
-      }
-      return ret.join("&");
-    }
-  ],
   headers: {
-    "Content-Type": "application/x-www-form-urlencoded"
+    "Content-Type": "application/json"
   }
 });
 

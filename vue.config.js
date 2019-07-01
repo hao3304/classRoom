@@ -29,6 +29,12 @@ module.exports = {
         pathRewrite: {"^/api" : ""},
         changeOrigin: true,
         ws: true
+      },
+      "/ide/": {
+        target: 'http://ide.joyoj.org/',
+        pathRewrite: {"^/ide" : ""},
+        changeOrigin: true,
+        ws: true
       }
     }
   },

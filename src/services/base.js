@@ -1,8 +1,9 @@
 import axios from "./axios";
 export default {
-  assignments: () => axios.get(`/assignments`),
-  problem: p => axios.get(`/problem`, { params: p }),
-  userInfo: ()=> axios.get('/userInfo'),
-  submitState:  p=> axios.get('/submitState', { params: p }),
-  submit: params => axios.post('/submit', params)
+  assignments: () => axios.get(`/api/assignments`),
+  problem: p => axios.get(`/api/problem`, { params: p }),
+  userInfo: ()=> axios.get('/api/userInfo'),
+  submitState:  p=> axios.get('/api/submitState', { params: p }),
+  submit: params => axios.post('/api/submit', params),
+  compile:  params => axios.post('/ide/compile', params)
 };

@@ -5,17 +5,14 @@
 <script>
     import * as monaco from "monaco-editor";
     export default {
-        props: ['value', 'height'],
+        props: ['code', 'height'],
         name: "editor",
         data() {
             return {
-                val: this.value
+                val: this.code
             }
         },
         watch: {
-            value() {
-                this.$editor.getModel().setValue(this.value);
-            },
             height() {
                 this.resize();
             }
@@ -35,16 +32,18 @@
                 })
             },
             resize() {
-                this.$editor.layout();
+                if(this.$editor) {
+                    this.$editor.layout();
+                }
             },
             getContent() {
-                this.$editor.getModel().getValue();
+                return this.$editor.getModel().getValue();
             }
         },
         mounted() {
             setTimeout(()=> {
                 this.render();
-            }, 500)
+            }, 200)
             window.onresize = ()=> {
                 this.$editor.layout();
             }
