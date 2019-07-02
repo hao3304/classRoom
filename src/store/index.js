@@ -3,12 +3,9 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 import app from "./app";
-import monitor from "./monitor";
 import common from "./common";
-import vip from "./vip";
 import router from "@/router";
 import ls from "@/libs/ls";
-import iot from "fvc-iot/src/store";
 
 export default new Vuex.Store({
   state: {
@@ -36,39 +33,8 @@ export default new Vuex.Store({
       state.winWidth = payload;
     }
   },
-  getters: {
-    getModel: state => (id, target = "iot", obj) => {
-      const model = {};
-      const types =
-        (target ? state.common.types[target] : state.common.types["iot"]) || [];
-      const type = types.find(type => type.name == id);
-      if (type) {
-        type.inputFields.forEach(field => {
-          model[field.name] = null;
-        });
-      }
-      return obj ? Object.assign(model, obj) : model;
-    },
-    getFieldName: state => (id, target) => {
-      const model = {};
-      const types =
-        (target ? state.common.types[target] : state.common.types["iot"]) || [];
-      const type = types.find(type => type.name == id);
-      if (type) {
-        const fields =
-          type.inputFields.length > 0 ? type.inputFields : type.fields;
-        fields.forEach(field => {
-          model[field.name] = field.description || field.name;
-        });
-      }
-      return model;
-    }
-  },
   modules: {
     app,
-    monitor,
-    common,
-    vip,
-    iot
+    common
   }
 });

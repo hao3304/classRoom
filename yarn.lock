@@ -3215,31 +3215,10 @@ functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/functional-red-black-tree/download/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
 
-fvc-iot@^0.3.6:
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/fvc-iot/-/fvc-iot-0.3.6.tgz#8b9d9686a7098b74cbc938c37c966d2e892b44da"
-  integrity sha512-ROOF9EZeh+UiWPdypj9dqg73G6fV6ZbpBnqrWvf9PEdcfTs8mWOm97JYmyZNUtZ99fQelJFOQ07URo0BND+WWw==
-  dependencies:
-    core-js "^2.6.5"
-    fvc "^0.4.9"
-    vue "^2.6.10"
-
-fvc@^0.4.9:
-  version "0.4.9"
-  resolved "https://registry.yarnpkg.com/fvc/-/fvc-0.4.9.tgz#3601cb2eb55596752e15e7b34bd15c7882804336"
-  dependencies:
-    core-js "^2.6.5"
-    iview "^3.3.3"
-    vue "^2.6.6"
-
-fvc@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/fvc/-/fvc-0.5.1.tgz#a955a9cd7e0832a089e254b23cb61c327d3cbbf2"
-  integrity sha512-3x/suGx3/dasc9uOELcJpqnWOxplhSf1KK2DQoVQ9lb2HxS1ieWkr3on4HmPpCXMvklzUlpRkG34F3mmnN6jlg==
-  dependencies:
-    core-js "^2.6.5"
-    iview "^3.3.3"
-    vue "^2.6.6"
+fvc@^0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/fvc/-/fvc-0.5.4.tgz#7d3991eebaadbca8710c97adc204b28ff5e6ddb5"
+  integrity sha512-Mo9CKQk4NlDARKIfOWpmSQjSDPeH+0HF8eB0bwNjtJavtbZxY57FHboxCrCskWZVHiCYiw7ZuVZhXE2wjmtX6Q==
 
 gauge@~2.7.3:
   version "2.7.4"
@@ -3996,19 +3975,6 @@ isobject@^3.0.0, isobject@^3.0.1:
 isstream@~0.1.2:
   version "0.1.2"
   resolved "http://registry.npm.taobao.org/isstream/download/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
-
-iview@^3.3.3:
-  version "3.4.0"
-  resolved "http://registry.npm.taobao.org/iview/download/iview-3.4.0.tgz#4b969fe6089065a583e092a92e463cd54e7ebfe9"
-  dependencies:
-    async-validator "^1.10.0"
-    deepmerge "^2.2.1"
-    element-resize-detector "^1.2.0"
-    js-calendar "^1.2.3"
-    lodash.throttle "^4.1.1"
-    popper.js "^1.14.6"
-    tinycolor2 "^1.4.1"
-    v-click-outside-x "^3.5.6"
 
 iview@^3.4.2:
   version "3.4.2"
@@ -6977,7 +6943,7 @@ vue2-animate@^2.1.0:
   version "2.1.0"
   resolved "http://registry.npm.taobao.org/vue2-animate/download/vue2-animate-2.1.0.tgz#93eee5f381d8d6493bae0507bcad6b615fdacb7f"
 
-vue@2.6.10, vue@^2.2.1, vue@^2.6.10, vue@^2.6.6:
+vue@2.6.10, vue@^2.2.1:
   version "2.6.10"
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
 

@@ -10,8 +10,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "fvc": "^0.5.1",
-    "fvc-iot": "^0.3.6",
+    "fvc": "^0.5.4",
     "iview": "^3.4.2",
     "jquery": "3.4.0",
     "jquery.terminal": "^2.6.3",

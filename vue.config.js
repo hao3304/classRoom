@@ -11,6 +11,7 @@ module.exports = {
   publicPath: process.env.VUE_APP_BASE,
   lintOnSave: false,
   runtimeCompiler: true, // 使用构建版vue
+  transpileDependencies: ['/node_modules/fvc'],
   css: {
     // 配置css模块
     loaderOptions: {

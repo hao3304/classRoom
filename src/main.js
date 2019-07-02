@@ -39,16 +39,6 @@ export default new Vue({
         window.document.documentElement.clientWidth
       );
     };
-
-    let timer = null;
-    window.onMapLoad = function() {
-      timer = setInterval(() => {
-        if (window.AMap && window.AMap.Map) {
-          store.commit("app/set_map_load", true);
-          clearInterval(timer);
-        }
-      }, 100);
-    };
   }
 }).$mount("#app");
 
