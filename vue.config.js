@@ -11,7 +11,7 @@ module.exports = {
   publicPath: process.env.VUE_APP_BASE,
   lintOnSave: false,
   runtimeCompiler: true, // 使用构建版vue
-  transpileDependencies: ['/node_modules/fvc'],
+  transpileDependencies: ["fvc"],
   css: {
     // 配置css模块
     loaderOptions: {
@@ -81,11 +81,5 @@ module.exports = {
   productionSourceMap: false,
   chainWebpack: config => {
     config.entry.app = ["babel-polyfill", resolve("src/main.js")];
-    config.module
-      .rule("graphql")
-      .test(/\.(graphql|gql)/)
-      .use("graphql-tag/loader")
-      .loader("graphql-tag/loader")
-      .end();
   }
 };

@@ -44,6 +44,13 @@
                 type="primary"
                 >提交</Button
               >
+
+              <div class="result" v-show="result">
+                判题结果：<Tag
+                  :color="result == 'Fail' ? 'error' : 'success'"
+                  >{{ result }}</Tag
+                >
+              </div>
             </div>
             <div slot="body" slot-scope="params" id="terminal"></div>
           </f-panel>
@@ -73,7 +80,8 @@ export default {
       stdout: [],
       type: 0,
       loading: false,
-      code: ""
+      code: "",
+      result: ""
     };
   },
   watch: {
@@ -199,14 +207,27 @@ export default {
               codes: [
                 {
                   id: this.ids[0],
-                  language: "CPP",
+                  language: "C++",
                   code: this.$refs.editor.getContent()
                 }
               ]
             })
-            .then(() => {
-              this.$Message.success("提交成功！");
+            .then(rep => {
+              this.getSubmitState(rep.submitId);
+              this.$Message.success("提交成功,请等待判题结果。");
             });
+        }
+      });
+    },
+    getSubmitState(submitId) {
+      service.submitState({ submitId }).then(rep => {
+        if (rep && rep.data && rep.data.judgeProgress) {
+          this.result = rep.data.judgeProgress[0].state;
+          if (this.result == "Judging") {
+            setTimeout(() => {
+              this.getSubmitState(submitId);
+            }, 2000);
+          }
         }
       });
     }
@@ -251,6 +272,14 @@ export default {
   &__toolbar {
     padding-top: 5px;
     padding-left: 10px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    .result {
+      display: flex;
+      align-items: center;
+      margin-left: 20px;
+    }
   }
 
   #terminal {
