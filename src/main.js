@@ -18,7 +18,6 @@ Vue.use(vueBemCn, {});
 import "vue2-animate/dist/vue2-animate.min.css";
 import "@/style/style.less";
 import "iview/dist/styles/iview.css";
-// Vue.directive("ripple", Ripple);
 Vue.config.productionTip = false;
 Vue.prototype.$ls = ls;
 window.eventBus = new Vue();

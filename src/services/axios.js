@@ -20,10 +20,10 @@ const instance = axios.create({
 instance.interceptors.response.use(
   res => {
     if (
-      typeof res.data == "string" &&
-      res.data.indexOf("access_token_cookie") > -1
+     res.data.err == "InvalidToken"
     ) {
-      Vue.$router.push("/login");
+      ls.set('cookies','');
+     return  Vue.$router.push("/login");
     } else if (res.data.err === "" || res.data.err == undefined) {
       return res.data;
     } else {

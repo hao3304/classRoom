@@ -5,6 +5,7 @@
 </template>
 <script>
 import { mapMutations, mapState } from "vuex";
+import axios from '@/services/axios'
 export default {
   data() {
     return {
@@ -21,13 +22,14 @@ export default {
     }
   },
   async beforeCreate() {
-    // const token = this.$ls.get("token");
-    // if (token) {
-    //   this.$store.commit("set_token", token);
-    //   await this.$store.dispatch("common/init");
-    // } else {
-    //   this.$router.replace({ name: "Login" });
-    // }
+    const token = this.$ls.get("cookies");
+    if (token) {
+      axios.defaults.headers["X-CSRF-TOKEN"] = token;
+      // this.$store.commit("set_token", token);
+      // await this.$store.dispatch("common/init");
+    } else {
+      this.$router.replace({ name: "Login" });
+    }
   },
   methods: {
     ...mapMutations("app", ["set_breadcrumbs"]),

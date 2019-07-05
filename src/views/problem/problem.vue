@@ -48,7 +48,7 @@
               <div class="result" v-show="result">
                 判题结果：<Tag
                   :color="result == 'Fail' ? 'error' : 'success'"
-                  >{{ result }}</Tag
+                  >{{ result }} <span v-if="log">: {{log}}</span></Tag
                 >
               </div>
             </div>
@@ -81,7 +81,8 @@ export default {
       type: 0,
       loading: false,
       code: "",
-      result: ""
+      result: "",
+      log: ''
     };
   },
   watch: {
@@ -223,6 +224,7 @@ export default {
       service.submitState({ submitId }).then(rep => {
         if (rep && rep.data && rep.data.judgeProgress) {
           this.result = rep.data.judgeProgress[0].state;
+          this.log = rep.data.judgeProgress[0].log;
           if (this.result == "Judging") {
             setTimeout(() => {
               this.getSubmitState(submitId);

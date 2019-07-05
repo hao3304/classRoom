@@ -21,10 +21,9 @@
     "vue": "2.6.10",
     "vue-bem-cn": "^1.1.1",
     "vue-gemini-scrollbar": "^2.0.0",
-    "vue-ripple-directive": "^2.0.1",
     "vue-router": "^3.0.1",
-    "vue2-animate": "^2.1.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vue2-animate": "^2.1.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",

@@ -6911,12 +6911,6 @@ vue-loader@^15.7.0:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
-vue-ripple-directive@^2.0.1:
-  version "2.0.1"
-  resolved "http://registry.npm.taobao.org/vue-ripple-directive/download/vue-ripple-directive-2.0.1.tgz#817ae4bc2874cbf01d8a018c8e8d97c8cadb6355"
-  dependencies:
-    vue "^2.2.1"
-
 vue-router@^3.0.1:
   version "3.0.6"
   resolved "http://registry.npm.taobao.org/vue-router/download/vue-router-3.0.6.tgz#2e4f0f9cbb0b96d0205ab2690cfe588935136ac3"
@@ -6943,7 +6937,7 @@ vue2-animate@^2.1.0:
   version "2.1.0"
   resolved "http://registry.npm.taobao.org/vue2-animate/download/vue2-animate-2.1.0.tgz#93eee5f381d8d6493bae0507bcad6b615fdacb7f"
 
-vue@2.6.10, vue@^2.2.1:
+vue@2.6.10:
   version "2.6.10"
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
 
