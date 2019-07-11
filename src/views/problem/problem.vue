@@ -46,9 +46,8 @@
               >
 
               <div class="result" v-show="result">
-                判题结果：<Tag
-                  :color="result == 'Fail' ? 'error' : 'success'"
-                  >{{ result }} <span v-if="log">: {{log}}</span></Tag
+                判题结果：<Tag :color="result == 'Fail' ? 'error' : 'success'"
+                  >{{ result }} <span v-if="log">: {{ log }}</span></Tag
                 >
               </div>
             </div>
@@ -82,7 +81,7 @@ export default {
       loading: false,
       code: "",
       result: "",
-      log: ''
+      log: ""
     };
   },
   watch: {

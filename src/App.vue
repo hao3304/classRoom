@@ -5,7 +5,7 @@
 </template>
 <script>
 import { mapMutations, mapState } from "vuex";
-import axios from '@/services/axios'
+import axios from "@/services/axios";
 export default {
   data() {
     return {
