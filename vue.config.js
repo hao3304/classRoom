@@ -26,7 +26,7 @@ module.exports = {
     historyApiFallback: true,
     proxy: {
       "/api/": {
-        target: "http://202.121.179.38:9000/",
+        target: "http://us02.01class.cn:9000/",
         pathRewrite: { "^/api": "" },
         changeOrigin: true,
         ws: true

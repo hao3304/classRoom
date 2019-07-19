@@ -1,14 +1,23 @@
 <template>
   <div class="p-problem">
-    <Tabs>
-      <TabPane
-        v-for="(_, index) in ids"
-        :label="'题目' + (index + 1)"
-        :key="index"
-      >
-        <div></div>
-      </TabPane>
-    </Tabs>
+    <Spin fix v-show="loadProblem"></Spin>
+    <f-bar
+      :simple="true"
+      :data="problemList"
+      v-if="ids.length > 0"
+      :default-active="targetId"
+      @on-select="onSelectProblem"
+    ></f-bar>
+    <!--    <Tabs>-->
+    <!--      <TabPane-->
+    <!--        v-for="(_, index) in ids"-->
+    <!--        :label="'题目' + (index + 1)"-->
+    <!--        :key="index"-->
+    <!--        on-click-->
+    <!--      >-->
+    <!--        <div></div>-->
+    <!--      </TabPane>-->
+    <!--    </Tabs>-->
     <div class="p-problem__content">
       <Split v-model="split" min="500px" max="600px">
         <div
@@ -16,7 +25,7 @@
           class="p-problem__desc"
           style="overflow-y: auto; overflow-x: hidden;padding: 0 15px;height: 100%"
         >
-          <h3>{{problem.title}}</h3>
+          <h3>{{ problem.title }}</h3>
           <Divider orientation="left">描述</Divider>
           <div class="desc" v-html="problem.description"></div>
           <Divider orientation="left">输入</Divider>
@@ -76,7 +85,7 @@ export default {
   data() {
     return {
       ids: [],
-      split: 0.4,
+      split: 0.5,
       vSplit: 0.7,
       problem: {},
       repoId: null,
@@ -87,10 +96,22 @@ export default {
       stdout: [],
       type: 0,
       loading: false,
+      loadProblem: false,
       code: "",
       result: "",
-      log: ""
+      log: "",
+      targetId: null
     };
+  },
+  computed: {
+    problemList() {
+      return this.ids.map((id, index) => {
+        return {
+          name: "题目" + (index + 1),
+          id: id
+        };
+      });
+    }
   },
   watch: {
     split() {
@@ -99,6 +120,7 @@ export default {
   },
   methods: {
     render(id) {
+      this.loadProblem = true;
       service.problem({ problemId: id }).then(rep => {
         this.problem = rep.data;
         this.$nextTick(() => {
@@ -112,6 +134,7 @@ export default {
         .lastSubmit({ assignmentId: this.assignmentId, problemId: id })
         .then(rep => {
           this.$refs.editor.setContent(rep.data);
+          this.loadProblem = false;
         });
     },
     renderTerminal() {
@@ -223,7 +246,8 @@ export default {
             .then(rep => {
               this.getSubmitState(rep.submitId);
               this.Message.success("提交成功,请等待判题结果。");
-            });r
+            });
+          r;
         }
       });
     },
@@ -239,6 +263,9 @@ export default {
           }
         }
       });
+    },
+    onSelectProblem(e) {
+      this.render(e[0]);
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -254,6 +281,7 @@ export default {
   mounted() {
     if (this.ids.length > 0) {
       this.render(this.ids[0]);
+      this.targetId = this.ids[0];
     }
     this.socket = io("http://ide.joyoj.org");
     this.socket.close();
@@ -270,6 +298,7 @@ export default {
   background-color: #fff;
   display: flex;
   flex-direction: column;
+  position: relative;
   overflow: hidden;
   .ivu-tabs-bar {
     margin-bottom: 0;
@@ -292,16 +321,29 @@ export default {
   }
 
   &__desc {
-    h1, h2, h3, h4 {
+    h1,
+    h2,
+    h3,
+    h4 {
       color: #111111;
       font-weight: 400;
       margin-top: 1em;
     }
 
-    h1, h2, h3, h4, h5 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
       font-family: Georgia, Palatino, serif;
     }
-    h1, h2, h3, h4, h5, p , dl{
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    p,
+    dl {
       margin-bottom: 16px;
       padding: 0;
     }
@@ -313,8 +355,9 @@ export default {
       font-size: 36px;
       line-height: 42px;
     }
-    h1, h2 {
-      border-bottom: 1px solid #EFEAEA;
+    h1,
+    h2 {
+      border-bottom: 1px solid #efeaea;
       padding-bottom: 10px;
     }
     h3 {
@@ -342,7 +385,8 @@ export default {
     a:visited {
       /*color: purple;*/
     }
-    ul, ol {
+    ul,
+    ol {
       padding: 0;
       padding-left: 24px;
       margin: 0;
@@ -350,12 +394,15 @@ export default {
     li {
       line-height: 24px;
     }
-    p, ul, ol {
+    p,
+    ul,
+    ol {
       font-size: 16px;
       line-height: 24px;
     }
 
-    ol ol, ul ol {
+    ol ol,
+    ul ol {
       list-style-type: lower-roman;
     }
 
@@ -370,9 +417,10 @@ export default {
         font-size: 13px;
     }*/
 
-    code, pre {
+    code,
+    pre {
       border-radius: 3px;
-      background-color:#f7f7f7;
+      background-color: #f7f7f7;
       color: inherit;
     }
 
@@ -385,7 +433,7 @@ export default {
       line-height: 1.7em;
       overflow: auto;
       padding: 6px 10px;
-      border-left: 5px solid #6CE26C;
+      border-left: 5px solid #6ce26c;
     }
 
     pre > code {
@@ -396,16 +444,14 @@ export default {
       margin: 0;
       overflow: initial;
       line-height: inherit;
-      font-size: .85em;
+      font-size: 0.85em;
       white-space: pre;
       background: 0 0;
-
     }
 
     code {
       color: #666555;
     }
-
 
     /** markdown preview plus 对于代码块的处理有些问题, 所以使用统一的颜色 */
     /*code .keyword {
@@ -426,17 +472,17 @@ export default {
       width: 390px;
     }
     blockquote {
-      border-left:.5em solid #eee;
+      border-left: 0.5em solid #eee;
       padding: 0 0 0 2em;
-      margin-left:0;
+      margin-left: 0;
     }
-    blockquote  cite {
-      font-size:14px;
-      line-height:20px;
-      color:#bfbfbf;
+    blockquote cite {
+      font-size: 14px;
+      line-height: 20px;
+      color: #bfbfbf;
     }
     blockquote cite:before {
-      content: '\2014 \00A0';
+      content: "\2014 \00A0";
     }
 
     blockquote p {
@@ -484,11 +530,13 @@ export default {
       vertical-align: baseline;
       *vertical-align: middle;
     }
-    button, input {
+    button,
+    input {
       line-height: normal;
       *overflow: visible;
     }
-    button::-moz-focus-inner, input::-moz-focus-inner {
+    button::-moz-focus-inner,
+    input::-moz-focus-inner {
       border: 0;
       padding: 0;
     }
@@ -499,11 +547,13 @@ export default {
       cursor: pointer;
       -webkit-appearance: button;
     }
-    input[type=checkbox], input[type=radio] {
+    input[type="checkbox"],
+    input[type="radio"] {
       cursor: pointer;
     }
     /* override default chrome & firefox settings */
-    input:not([type="image"]), textarea {
+    input:not([type="image"]),
+    textarea {
       -webkit-box-sizing: content-box;
       -moz-box-sizing: content-box;
       box-sizing: content-box;
@@ -528,12 +578,13 @@ export default {
       line-height: normal;
       margin-bottom: 18px;
     }
-    input[type=checkbox], input[type=radio] {
+    input[type="checkbox"],
+    input[type="radio"] {
       cursor: pointer;
       margin-bottom: 0;
     }
-    input[type=text],
-    input[type=password],
+    input[type="text"],
+    input[type="password"],
     textarea,
     select {
       display: inline-block;
@@ -549,7 +600,8 @@ export default {
       -moz-border-radius: 3px;
       border-radius: 3px;
     }
-    select, input[type=file] {
+    select,
+    input[type="file"] {
       height: 27px;
       line-height: 27px;
     }
@@ -580,7 +632,8 @@ export default {
       -ms-transition: all 0.1s ease-in-out;
       transition: all 0.1s ease-in-out;
     }
-    table td, .table th {
+    table td,
+    .table th {
       border-left: 1px solid #ccc;
       border-top: 1px solid #ccc;
       padding: 10px;
@@ -589,21 +642,13 @@ export default {
 
     table th {
       background-color: #dce9f9;
-      background-image: -webkit-gradient(linear, left top, left bottom, from(#ebf3fc), to(#dce9f9));
-      background-image: -webkit-linear-gradient(top, #ebf3fc, #dce9f9);
-      background-image:    -moz-linear-gradient(top, #ebf3fc, #dce9f9);
-      background-image:     -ms-linear-gradient(top, #ebf3fc, #dce9f9);
-      background-image:      -o-linear-gradient(top, #ebf3fc, #dce9f9);
-      background-image:         linear-gradient(top, #ebf3fc, #dce9f9);
-      /*-webkit-box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;
-      -moz-box-shadow:0 1px 0 rgba(255,255,255,.8) inset;
-      box-shadow: 0 1px 0 rgba(255,255,255,.8) inset;*/
       border-top: none;
-      text-shadow: 0 1px 0 rgba(255,255,255,.5);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
       padding: 5px;
     }
 
-    table td:first-child, table th:first-child {
+    table td:first-child,
+    table th:first-child {
       border-left: none;
     }
 
@@ -617,7 +662,7 @@ export default {
       -webkit-border-radius: 0 6px 0 0;
       border-radius: 0 6px 0 0;
     }
-    table th:only-child{
+    table th:only-child {
       -moz-border-radius: 6px 6px 0 0;
       -webkit-border-radius: 6px 6px 0 0;
       border-radius: 6px 6px 0 0;
