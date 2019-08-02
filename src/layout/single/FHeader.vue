@@ -104,7 +104,7 @@
         <f-icon icon="iconshuaxin1" @click="onRefresh"></f-icon>
       </a>
       <a href="javascript:;">
-        <f-icon icon="icontuichu" @click="onLogout"></f-icon>
+        <f-icon icon="icontuichu1-copy" @click="onLogout"></f-icon>
       </a>
     </div>
   </div>
