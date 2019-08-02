@@ -195,8 +195,8 @@ export default {
     return {
       baseURL,
       form: {
-        userid: "xuyang",
-        password: "xuyang"
+        userid: "",
+        password: ""
       },
       mode: "login",
       model: model(),
