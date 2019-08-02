@@ -53,13 +53,12 @@ export default new Router({
       ]
     },
     {
-      path: "/home",
-      alias: "/",
+      path: "/work",
       component: () => import("@/layout/single"),
       children: [
         {
           path: "",
-          name: "home",
+          name: "Work",
           meta: {
             title: "作业练习"
           },
@@ -77,15 +76,16 @@ export default new Router({
     },
     {
       path: "/study",
+      alias: "/",
       component: () => import("@/layout/single"),
       children: [
         {
           path: "",
-          name: "study",
+          name: "Home",
           meta: {
             title: "课堂学习"
           },
-          component: Building
+          component: () => import("@/views/course/list")
         }
       ]
     }

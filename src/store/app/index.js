@@ -6,13 +6,13 @@ export default {
         id: 2,
         name: "课堂学习",
         icon: "iconkecheng",
-        path: "study"
+        path: "Home"
       },
       {
         id: 1,
         name: "作业练习",
         icon: "iconzuoye",
-        path: "home"
+        path: "Work"
       }
       // {
       //   id: 2,

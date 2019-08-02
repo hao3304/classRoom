@@ -240,7 +240,7 @@ export default {
             .login(this.form)
             .then(rep => {
               this.loading = false;
-              this.$router.replace({ name: rep.redirect });
+              this.$router.replace({ name: "Home" });
               const cookies = document.cookie.split("=")[1];
               ls.set("cookies", cookies, new Date().valueOf() + 3600 * 24000);
               axios.defaults.headers["X-CSRF-TOKEN"] = cookies;
