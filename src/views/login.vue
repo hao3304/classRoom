@@ -37,7 +37,7 @@
               <Input
                 v-model="form.userid"
                 size="large"
-                placeholder="请输入企业/单位名称"
+                placeholder="请输入用戶名"
               >
                 <Icon type="md-contact" slot="prefix" />
               </Input>
