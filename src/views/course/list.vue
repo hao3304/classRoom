@@ -48,7 +48,7 @@ const courseIcon = require("@/assets/images/course.png");
 const PATH =
   process.env.NODE_ENV == "development"
     ? "http://localhost:8360"
-    : "http://us03.01class.cn";
+    : "http://104.225.233.118:8360";
 export default {
   name: "p-course",
   components: { meditor },
