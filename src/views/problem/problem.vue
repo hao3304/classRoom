@@ -120,6 +120,7 @@ export default {
   },
   methods: {
     render(id) {
+      this.targetId = id;
       this.loadProblem = true;
       service.problem({ problemId: id }).then(rep => {
         this.problem = rep.data;
@@ -237,7 +238,7 @@ export default {
               assignmentId: this.assignmentId,
               codes: [
                 {
-                  id: this.ids[0],
+                  id: this.targetId,
                   language: "C++",
                   code: this.$refs.editor.getContent()
                 }
@@ -281,7 +282,6 @@ export default {
   mounted() {
     if (this.ids.length > 0) {
       this.render(this.ids[0]);
-      this.targetId = this.ids[0];
     }
     this.socket = io("http://ide.joyoj.org");
     this.socket.close();
