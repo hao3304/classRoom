@@ -14,7 +14,7 @@
     "iview": "^3.4.2",
     "jquery": "3.4.0",
     "jquery.terminal": "^2.6.3",
-    "marked": "^0.6.2",
+    "marked": "^0.7.0",
     "monaco-editor": "0.17.1",
     "pygmentize-bundled": "^2.3.0",
     "store": "^2.0.12",
