@@ -9,7 +9,7 @@
     "dll": "webpack -p --progress --config ./webpack.dll.conf.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "fvc": "^0.5.5",
     "iview": "^3.4.2",
     "jquery": "3.4.0",
